@@ -1,6 +1,13 @@
 {
-    "title":"JabinSun Blog",
-    "subTitle":"Log for blog",
+    "title":"DevOps Blog",
+    "subTitle":"生活何尝不是一种记录",
     "avatarUrl":"https://github.githubassets.com/favicons/favicon.svg",
-    "GMEEK_VERSION":"last"
+    "GMEEK_VERSION":"last",
+    "startSite":"21/06/2024",
+    "yearColorList":["#bc4c00", "#0969da", "#1f883d", "#A333D0"],
+    "i18n":"CN",
+    "UTC":8,
+    "themeMode":"manual",
+    "dayTheme":"light",
+    "nightTheme":"dark_colorblind"
 }
