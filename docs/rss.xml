@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<rss xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/" version="2.0"><channel><title>DevOps Blog</title><link>https://jabinsun.github.io</link><description>好记性不如烂笔头</description><copyright>DevOps Blog</copyright><docs>http://www.rssboard.org/rss-specification</docs><generator>python-feedgen</generator><image><url>https://github.githubassets.com/favicons/favicon.svg</url><title>avatar</title><link>https://jabinsun.github.io</link></image><lastBuildDate>Fri, 21 Jun 2024 07:40:41 +0000</lastBuildDate><managingEditor>DevOps Blog</managingEditor><ttl>60</ttl><webMaster>DevOps Blog</webMaster><item><title>【Docerfile】Dockerfile.python</title><link>https://jabinsun.github.io/post/%E3%80%90Docerfile%E3%80%91Dockerfile.python.html</link><description>```Dockerfile&#13;
+<rss xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/" version="2.0"><channel><title>DevOps Blog</title><link>https://jabinsun.github.io</link><description>好记性不如烂笔头</description><copyright>DevOps Blog</copyright><docs>http://www.rssboard.org/rss-specification</docs><generator>python-feedgen</generator><image><url>https://github.githubassets.com/favicons/favicon.svg</url><title>avatar</title><link>https://jabinsun.github.io</link></image><lastBuildDate>Fri, 21 Jun 2024 07:42:35 +0000</lastBuildDate><managingEditor>DevOps Blog</managingEditor><ttl>60</ttl><webMaster>DevOps Blog</webMaster><item><title>【Docerfile】Dockerfile.python</title><link>https://jabinsun.github.io/post/%E3%80%90Docerfile%E3%80%91Dockerfile.python.html</link><description>```Dockerfile&#13;
 FROM python:3.10-slim AS builder&#13;
 ENV PYTHONDONTWRITEBYTECODE=1&#13;
 ENV PYTHONUNBUFFERED=1&#13;
@@ -43,7 +43,7 @@ COPY . /app&#13;
 RUN adduser -u 5678 --disabled-password --gecos '' appuser &amp;&amp; chown -R appuser /app&#13;
 USER appuser&#13;
 CMD ['uvicorn', 'shortener_app.main:app', '--host', '0.0.0.0']&#13;
-```。</description><guid isPermaLink="true">https://jabinsun.github.io/post/%E3%80%90Docerfile%E3%80%91Dockerfile.python.html</guid><pubDate>Fri, 21 Jun 2024 07:40:13 +0000</pubDate></item><item><title>【dockerfile】Dockerfile.crontab</title><link>https://jabinsun.github.io/post/%E3%80%90dockerfile%E3%80%91Dockerfile.crontab.html</link><description>```Dockerfile&#13;
+```。</description><guid isPermaLink="true">https://jabinsun.github.io/post/%E3%80%90Docerfile%E3%80%91Dockerfile.python.html</guid><pubDate>Fri, 21 Jun 2024 07:40:13 +0000</pubDate></item><item><title>【Dockerfile】Dockerfile.crontab</title><link>https://jabinsun.github.io/post/%E3%80%90Dockerfile%E3%80%91Dockerfile.crontab.html</link><description>```Dockerfile&#13;
 FROM alpine:latest&#13;
 ENV SUPERCRONIC_URL=https://github.com/aptible/supercronic/releases/download/v0.1.12/supercronic-linux-amd64 \&#13;
     SUPERCRONIC=supercronic-linux-amd64 \&#13;
@@ -62,7 +62,7 @@ CMD ['/usr/local/bin/supercronic', '-debug', '/app/cronfile']&#13;
 &#13;
 ```shell&#13;
 echo '* * * * * date' &gt;&gt; /app/cronfile.log&#13;
-```。</description><guid isPermaLink="true">https://jabinsun.github.io/post/%E3%80%90dockerfile%E3%80%91Dockerfile.crontab.html</guid><pubDate>Fri, 21 Jun 2024 07:36:56 +0000</pubDate></item><item><title>【elasticsearch】es常用命令</title><link>https://jabinsun.github.io/post/%E3%80%90elasticsearch%E3%80%91es-chang-yong-ming-ling.html</link><description>- 检查es集群状态&#13;
+```。</description><guid isPermaLink="true">https://jabinsun.github.io/post/%E3%80%90Dockerfile%E3%80%91Dockerfile.crontab.html</guid><pubDate>Fri, 21 Jun 2024 07:36:56 +0000</pubDate></item><item><title>【elasticsearch】es常用命令</title><link>https://jabinsun.github.io/post/%E3%80%90elasticsearch%E3%80%91es-chang-yong-ming-ling.html</link><description>- 检查es集群状态&#13;
 ```shell&#13;
 curl -XGET http://localhost:9200/_cluster/health\?pretty&#13;
 ```&#13;
