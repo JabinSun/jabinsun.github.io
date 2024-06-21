@@ -4,6 +4,7 @@ Unable to negotiate with 1.1.1.1 port 22: no matching host key type found. Their
 
 ### 环境
 
+CentOS版本：CentOS release 6.5 (Final)
 OpenSSH版本：OpenSSH_5.3p1, OpenSSL 1.0.1e-fips 11 Feb 2013
 OpenSSL版本：OpenSSL 1.0.1e-fips 11 Feb 2013
 
