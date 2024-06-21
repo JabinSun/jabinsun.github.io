@@ -20,6 +20,11 @@ curl -XPUT 'http://localhost:9200/_settings' -H 'content-Type:application/json' 
 {
     'number_of_replicas': 0
 }'
+```
+
+- 查看es所有索引
+```shell
+curl -XGET http://localhost:9200/_cat/indices
 ```。">
 <meta property="og:title" content="【elasticsearch】es常用命令">
 <meta property="og:description" content="- 检查es集群状态
@@ -33,6 +38,11 @@ curl -XPUT 'http://localhost:9200/_settings' -H 'content-Type:application/json' 
 {
     'number_of_replicas': 0
 }'
+```
+
+- 查看es所有索引
+```shell
+curl -XGET http://localhost:9200/_cat/indices
 ```。">
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://jabinsun.github.io/post/%E3%80%90elasticsearch%E3%80%91es-chang-yong-ming-ling.html">
@@ -102,7 +112,11 @@ body{box-sizing: border-box;min-width: 200px;max-width: 900px;margin: 20px auto;
 <div class="highlight highlight-source-shell"><pre class="notranslate">curl -XPUT <span class="pl-s"><span class="pl-pds">'</span>http://localhost:9200/_settings<span class="pl-pds">'</span></span> -H <span class="pl-s"><span class="pl-pds">'</span>content-Type:application/json<span class="pl-pds">'</span></span> -d<span class="pl-s"><span class="pl-pds">'</span></span>
 <span class="pl-s">{</span>
 <span class="pl-s">    "number_of_replicas": 0</span>
-<span class="pl-s">}<span class="pl-pds">'</span></span></pre></div></div>
+<span class="pl-s">}<span class="pl-pds">'</span></span></pre></div>
+<ul>
+<li>查看es所有索引</li>
+</ul>
+<div class="highlight highlight-source-shell"><pre class="notranslate">curl -XGET http://localhost:9200/_cat/indices</pre></div></div>
 <div style="font-size:small;margin-top:8px;float:right;">❤️ 转载文章请注明出处，谢谢！❤️</div>
 <button class="btn btn-block" type="button" onclick="openComments()" id="cmButton">评论</button>
 <div class="comments" id="comments"></div>

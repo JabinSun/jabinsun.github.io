@@ -10,3 +10,8 @@ curl -XPUT 'http://localhost:9200/_settings' -H 'content-Type:application/json' 
     "number_of_replicas": 0
 }'
 ```
+
+- 查看es所有索引
+```shell
+curl -XGET http://localhost:9200/_cat/indices
+```
