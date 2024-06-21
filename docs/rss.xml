@@ -1,5 +1,24 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<rss xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/" version="2.0"><channel><title>DevOps Blog</title><link>https://jabinsun.github.io</link><description>好记性不如烂笔头</description><copyright>DevOps Blog</copyright><docs>http://www.rssboard.org/rss-specification</docs><generator>python-feedgen</generator><image><url>https://github.githubassets.com/favicons/favicon.svg</url><title>avatar</title><link>https://jabinsun.github.io</link></image><lastBuildDate>Fri, 21 Jun 2024 07:28:51 +0000</lastBuildDate><managingEditor>DevOps Blog</managingEditor><ttl>60</ttl><webMaster>DevOps Blog</webMaster><item><title>【elasticsearch】es常用命令</title><link>https://jabinsun.github.io/post/%E3%80%90elasticsearch%E3%80%91es-chang-yong-ming-ling.html</link><description>- 检查es集群状态&#13;
+<rss xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/" version="2.0"><channel><title>DevOps Blog</title><link>https://jabinsun.github.io</link><description>好记性不如烂笔头</description><copyright>DevOps Blog</copyright><docs>http://www.rssboard.org/rss-specification</docs><generator>python-feedgen</generator><image><url>https://github.githubassets.com/favicons/favicon.svg</url><title>avatar</title><link>https://jabinsun.github.io</link></image><lastBuildDate>Fri, 21 Jun 2024 07:37:20 +0000</lastBuildDate><managingEditor>DevOps Blog</managingEditor><ttl>60</ttl><webMaster>DevOps Blog</webMaster><item><title>【dockerfile】Dockerfile.crontab</title><link>https://jabinsun.github.io/post/%E3%80%90dockerfile%E3%80%91Dockerfile.crontab.html</link><description>```Dockerfile&#13;
+FROM alpine:latest&#13;
+ENV SUPERCRONIC_URL=https://github.com/aptible/supercronic/releases/download/v0.1.12/supercronic-linux-amd64 \&#13;
+    SUPERCRONIC=supercronic-linux-amd64 \&#13;
+    SUPERCRONIC_SHA1SUM=048b95b48b708983effb2e5c935a1ef8483d9e3e&#13;
+RUN apk update \&#13;
+    &amp;&amp; apk --no-cache add curl \&#13;
+    &amp;&amp; curl -fsSLO '$SUPERCRONIC_URL' \&#13;
+    &amp;&amp; echo '${SUPERCRONIC_SHA1SUM}  ${SUPERCRONIC}' | sha1sum -c - \&#13;
+    &amp;&amp; chmod +x '$SUPERCRONIC' \&#13;
+    &amp;&amp; mv '$SUPERCRONIC' '/usr/local/bin/${SUPERCRONIC}' \&#13;
+    &amp;&amp; ln -s '/usr/local/bin/${SUPERCRONIC}' /usr/local/bin/supercronic&#13;
+COPY cronfile /app/cronfile&#13;
+# RUN cron job&#13;
+CMD ['/usr/local/bin/supercronic', '-debug', '/app/cronfile']&#13;
+```&#13;
+&#13;
+```shell&#13;
+echo '* * * * * date' &gt;&gt; /app/cronfile.log&#13;
+```。</description><guid isPermaLink="true">https://jabinsun.github.io/post/%E3%80%90dockerfile%E3%80%91Dockerfile.crontab.html</guid><pubDate>Fri, 21 Jun 2024 07:36:56 +0000</pubDate></item><item><title>【elasticsearch】es常用命令</title><link>https://jabinsun.github.io/post/%E3%80%90elasticsearch%E3%80%91es-chang-yong-ming-ling.html</link><description>- 检查es集群状态&#13;
 ```shell&#13;
 curl -XGET http://localhost:9200/_cluster/health\?pretty&#13;
 ```&#13;
