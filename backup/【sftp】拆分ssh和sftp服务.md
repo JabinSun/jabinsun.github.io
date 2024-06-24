@@ -40,8 +40,6 @@ RestartSec=42s
 [Install]
 WantedBy=multi-user.target
 ==========
-
-systemctl start sftpd
 ```
 
 ### 更改配置⽂件使得sftpd服务能独⽴并且拒绝其他⽤⼾使⽤
@@ -57,9 +55,16 @@ Subsystem sftp /usr/libexec/openssh/sftp-server ---> #Subsystem sftp /usr/libexe
 # 指定使⽤sftp服务使⽤系统⾃带的internal-sftp
 Subsystem sftp internal-sftp -l INFO -f AUTH
 AllowGroups sftpusers
+# Match Group sftpusers
+#     ChrootDirectory %h
+#     ForceCommand internal-sftp
+#     AllowTcpForwarding no
+#     X11Forwarding no
 ==========
 
-systemctl restart sftpd
+systemctl daemon-reload
+systemctl enable sshd_sftp
+systemctl start sftpd
 ```
 
 ### 创建⽤⼾及⽤⼾组

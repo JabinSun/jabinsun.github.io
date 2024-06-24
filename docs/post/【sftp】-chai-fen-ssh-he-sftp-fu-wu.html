@@ -112,9 +112,7 @@ Restart=on-failure
 RestartSec=42s
 [Install]
 WantedBy=multi-user.target
-==========
-
-systemctl start sftpd</pre></div>
+==========</pre></div>
 <h3>更改配置⽂件使得sftpd服务能独⽴并且拒绝其他⽤⼾使⽤</h3>
 <div class="highlight highlight-source-shell"><pre class="notranslate">vim /etc/ssh/sftpd_config
 ==========
@@ -127,9 +125,16 @@ Subsystem sftp /usr/libexec/openssh/sftp-server ---<span class="pl-k">&gt;</span
 <span class="pl-c"><span class="pl-c">#</span> 指定使⽤sftp服务使⽤系统⾃带的internal-sftp</span>
 Subsystem sftp internal-sftp -l INFO -f AUTH
 AllowGroups sftpusers
+<span class="pl-c"><span class="pl-c">#</span> Match Group sftpusers</span>
+<span class="pl-c"><span class="pl-c">#</span>     ChrootDirectory %h</span>
+<span class="pl-c"><span class="pl-c">#</span>     ForceCommand internal-sftp</span>
+<span class="pl-c"><span class="pl-c">#</span>     AllowTcpForwarding no</span>
+<span class="pl-c"><span class="pl-c">#</span>     X11Forwarding no</span>
 ==========
 
-systemctl restart sftpd</pre></div>
+systemctl daemon-reload
+systemctl <span class="pl-c1">enable</span> sshd_sftp
+systemctl start sftpd</pre></div>
 <h3>创建⽤⼾及⽤⼾组</h3>
 <div class="highlight highlight-source-shell"><pre class="notranslate">groupadd sftpusers
 mkdir -p /home/sftp
