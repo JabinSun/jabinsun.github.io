@@ -96,7 +96,7 @@ cp /etc/sysconfig/sshd /etc/sysconfig/sftp
 cp /var/run/sshd.pid /var/run/sftpd.pid <span class="pl-k">&gt;</span> /var/run/sftpd.pid</pre></div>
 <h3>修改SFTP配置⽂件</h3>
 <div class="highlight highlight-source-shell"><pre class="notranslate">vim /etc/systemd/system/sftpd.service
-<span class="pl-c"><span class="pl-c">#</span>##</span>
+==========
 [Unit]
 Description=sftpd server daemon
 Documentation=man:sshd(8) man:sshd_config(5)
@@ -112,20 +112,20 @@ Restart=on-failure
 RestartSec=42s
 [Install]
 WantedBy=multi-user.target
-<span class="pl-c"><span class="pl-c">#</span>##</span></pre></div>
+==========</pre></div>
 <h3>更改配置⽂件使得sftpd服务能独⽴并且拒绝其他⽤⼾使⽤</h3>
 <div class="highlight highlight-source-shell"><pre class="notranslate">vim /etc/ssh/sftpd_config
-<span class="pl-c"><span class="pl-c">#</span>####</span>
+==========
 Port 22 ---<span class="pl-k">&gt;</span> Port 2222
 <span class="pl-c"><span class="pl-c">#</span>PermitRootLogin yes ---&gt; PermitRootLogin no</span>
 <span class="pl-c"><span class="pl-c">#</span>PidFile /var/run/sshd.pid ---&gt; PidFile /var/run/sftpd.pid</span>
 Subsystem sftp /usr/libexec/openssh/sftp-server ---<span class="pl-k">&gt;</span> <span class="pl-c"><span class="pl-c">#</span>Subsystem sftp /usr/libexec/openssh/sftp-server</span>
-<span class="pl-c"><span class="pl-c">#</span>####</span>
-<span class="pl-c"><span class="pl-c">#</span>添加以下内容</span>
+==========
+<span class="pl-c"><span class="pl-c">#</span> 添加以下内容</span>
 <span class="pl-c"><span class="pl-c">#</span> 指定使⽤sftp服务使⽤系统⾃带的internal-sftp</span>
 Subsystem sftp internal-sftp -l INFO -f AUTH
 AllowGroups sftpusers
-<span class="pl-c"><span class="pl-c">#</span>####</span></pre></div>
+==========</pre></div>
 <h3>创建⽤⼾及⽤⼾组</h3>
 <div class="highlight highlight-source-shell"><pre class="notranslate">groupadd sftpusers
 mkdir -p /home/sftp
@@ -134,17 +134,17 @@ chmod 755 /home/sftp
 mkdir -p /u01/scripts</pre></div>
 <h3>⽤⼾创建脚本</h3>
 <div class="highlight highlight-source-shell"><pre class="notranslate">vim /u01/sftpuseradd.sh
-<span class="pl-c"><span class="pl-c">#</span>##</span>
+==========
 <span class="pl-c"><span class="pl-c">#!</span> /bin/bash</span>
 useradd -g sftpusers -d /home/sftp/<span class="pl-smi">$1</span> <span class="pl-smi">$1</span>
 chown <span class="pl-smi">$1</span>:sftpusers /home/sftp/<span class="pl-smi">$1</span>
-<span class="pl-c"><span class="pl-c">#</span>⽂件所属⽤⼾读写执⾏，属组⽤⼾、其他⽤⼾⽆权限</span>
+<span class="pl-c"><span class="pl-c">#</span> ⽂件所属⽤⼾读写执⾏，属组⽤⼾、其他⽤⼾⽆权限</span>
 chmod 700 /home/sftp/<span class="pl-smi">$1</span>
 <span class="pl-c1">echo</span> <span class="pl-smi">$2</span> <span class="pl-k">|</span> passwd --stdin <span class="pl-smi">$1</span>
-<span class="pl-c"><span class="pl-c">#</span>##</span></pre></div>
+==========</pre></div>
 <h3>⽤⼾创建脚本执⾏</h3>
 <div class="highlight highlight-source-shell"><pre class="notranslate">chmod 755 /u01/sftpuseradd.sh
-<span class="pl-c"><span class="pl-c">#</span>⽤⼾创建⽰例，第⼀个参数是⽤⼾名，第⼆个是密码</span>
+<span class="pl-c"><span class="pl-c">#</span> ⽤⼾创建⽰例，第⼀个参数是⽤⼾名，第⼆个是密码</span>
 sh /u01/sftpuseradd.sh sftpu xxxxxxxx</pre></div></div>
 <div style="font-size:small;margin-top:8px;float:right;">❤️ 转载文章请注明出处，谢谢！❤️</div>
 <button class="btn btn-block" type="button" onclick="openComments()" id="cmButton">评论</button>

@@ -23,7 +23,7 @@ cp /var/run/sshd.pid /var/run/sftpd.pid > /var/run/sftpd.pid
 ### 修改SFTP配置⽂件
 ```shell
 vim /etc/systemd/system/sftpd.service
-###
+==========
 [Unit]
 Description=sftpd server daemon
 Documentation=man:sshd(8) man:sshd_config(5)
@@ -39,23 +39,23 @@ Restart=on-failure
 RestartSec=42s
 [Install]
 WantedBy=multi-user.target
-###
+==========
 ```
 
 ### 更改配置⽂件使得sftpd服务能独⽴并且拒绝其他⽤⼾使⽤
 ```shell
 vim /etc/ssh/sftpd_config
-#####
+==========
 Port 22 ---> Port 2222
 #PermitRootLogin yes ---> PermitRootLogin no
 #PidFile /var/run/sshd.pid ---> PidFile /var/run/sftpd.pid
 Subsystem sftp /usr/libexec/openssh/sftp-server ---> #Subsystem sftp /usr/libexec/openssh/sftp-server
-#####
-#添加以下内容
+==========
+# 添加以下内容
 # 指定使⽤sftp服务使⽤系统⾃带的internal-sftp
 Subsystem sftp internal-sftp -l INFO -f AUTH
 AllowGroups sftpusers
-#####
+==========
 ```
 
 ### 创建⽤⼾及⽤⼾组
@@ -70,20 +70,20 @@ mkdir -p /u01/scripts
 ### ⽤⼾创建脚本
 ```shell
 vim /u01/sftpuseradd.sh
-###
+==========
 #! /bin/bash
 useradd -g sftpusers -d /home/sftp/$1 $1
 chown $1:sftpusers /home/sftp/$1
-#⽂件所属⽤⼾读写执⾏，属组⽤⼾、其他⽤⼾⽆权限
+# ⽂件所属⽤⼾读写执⾏，属组⽤⼾、其他⽤⼾⽆权限
 chmod 700 /home/sftp/$1
 echo $2 | passwd --stdin $1
-###
+==========
 ```
 
 ### ⽤⼾创建脚本执⾏
 ```shell
 chmod 755 /u01/sftpuseradd.sh
-#⽤⼾创建⽰例，第⼀个参数是⽤⼾名，第⼆个是密码
+# ⽤⼾创建⽰例，第⼀个参数是⽤⼾名，第⼆个是密码
 sh /u01/sftpuseradd.sh sftpu xxxxxxxx
 ```
 
