@@ -11,9 +11,9 @@ cp /etc/pam.d/sshd /etc/pam.d/sftpd
 
 cp /etc/ssh/sshd_config /etc/ssh/sftpd_config
 
-ln -sf /usr/sbin/service /usr/sbin/rcsftp
+ln -sf /usr/sbin/service /usr/sbin/rcsftpd
 
-ln -sf /usr/sbin/sshd /usr/sbin/sftp
+ln -sf /usr/sbin/sshd /usr/sbin/sftpd
 
 cp /etc/sysconfig/sshd /etc/sysconfig/sftp
 
