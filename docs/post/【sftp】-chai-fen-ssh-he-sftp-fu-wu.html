@@ -87,11 +87,11 @@ cp /etc/pam.d/sshd /etc/pam.d/sftpd
 
 cp /etc/ssh/sshd_config /etc/ssh/sftpd_config
 
-ln -sf /usr/sbin/service /usr/sbin/rcsftpd
+<span class="pl-c"><span class="pl-c">#</span> ln -sf /usr/sbin/service /usr/sbin/rcsftpd</span>
 
 ln -sf /usr/sbin/sshd /usr/sbin/sftpd
 
-cp /etc/sysconfig/sshd /etc/sysconfig/sftp
+cp /etc/sysconfig/sshd /etc/sysconfig/sftpd
 
 cp /var/run/sshd.pid /var/run/sftpd.pid <span class="pl-k">&gt;</span> /var/run/sftpd.pid</pre></div>
 <h3>修改SFTP配置⽂件</h3>
@@ -104,7 +104,7 @@ After=network.target sshd-keygen.service
 Wants=sshd-keygen.service
 [Service]
 Type=notify
-EnvironmentFile=/etc/sysconfig/sftp
+EnvironmentFile=/etc/sysconfig/sftpd
 ExecStart=/usr/sbin/sftpd -f /etc/ssh/sftpd_config
 ExecReload=/bin/kill -HUP <span class="pl-smi">$MAINPID</span>
 KillMode=process
@@ -112,7 +112,9 @@ Restart=on-failure
 RestartSec=42s
 [Install]
 WantedBy=multi-user.target
-==========</pre></div>
+==========
+
+systemctl start sftpd</pre></div>
 <h3>更改配置⽂件使得sftpd服务能独⽴并且拒绝其他⽤⼾使⽤</h3>
 <div class="highlight highlight-source-shell"><pre class="notranslate">vim /etc/ssh/sftpd_config
 ==========
@@ -125,7 +127,9 @@ Subsystem sftp /usr/libexec/openssh/sftp-server ---<span class="pl-k">&gt;</span
 <span class="pl-c"><span class="pl-c">#</span> 指定使⽤sftp服务使⽤系统⾃带的internal-sftp</span>
 Subsystem sftp internal-sftp -l INFO -f AUTH
 AllowGroups sftpusers
-==========</pre></div>
+==========
+
+systemctl restart sftpd</pre></div>
 <h3>创建⽤⼾及⽤⼾组</h3>
 <div class="highlight highlight-source-shell"><pre class="notranslate">groupadd sftpusers
 mkdir -p /home/sftp

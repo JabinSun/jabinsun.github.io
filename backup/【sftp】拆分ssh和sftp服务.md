@@ -11,11 +11,11 @@ cp /etc/pam.d/sshd /etc/pam.d/sftpd
 
 cp /etc/ssh/sshd_config /etc/ssh/sftpd_config
 
-ln -sf /usr/sbin/service /usr/sbin/rcsftpd
+# ln -sf /usr/sbin/service /usr/sbin/rcsftpd
 
 ln -sf /usr/sbin/sshd /usr/sbin/sftpd
 
-cp /etc/sysconfig/sshd /etc/sysconfig/sftp
+cp /etc/sysconfig/sshd /etc/sysconfig/sftpd
 
 cp /var/run/sshd.pid /var/run/sftpd.pid > /var/run/sftpd.pid
 ```
@@ -31,7 +31,7 @@ After=network.target sshd-keygen.service
 Wants=sshd-keygen.service
 [Service]
 Type=notify
-EnvironmentFile=/etc/sysconfig/sftp
+EnvironmentFile=/etc/sysconfig/sftpd
 ExecStart=/usr/sbin/sftpd -f /etc/ssh/sftpd_config
 ExecReload=/bin/kill -HUP $MAINPID
 KillMode=process
@@ -40,6 +40,8 @@ RestartSec=42s
 [Install]
 WantedBy=multi-user.target
 ==========
+
+systemctl start sftpd
 ```
 
 ### 更改配置⽂件使得sftpd服务能独⽴并且拒绝其他⽤⼾使⽤
@@ -56,6 +58,8 @@ Subsystem sftp /usr/libexec/openssh/sftp-server ---> #Subsystem sftp /usr/libexe
 Subsystem sftp internal-sftp -l INFO -f AUTH
 AllowGroups sftpusers
 ==========
+
+systemctl restart sftpd
 ```
 
 ### 创建⽤⼾及⽤⼾组
