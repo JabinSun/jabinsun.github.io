@@ -71,7 +71,7 @@ mkdir -p /u01/scripts
 ```shell
 vim /u01/sftpuseradd.sh
 ==========
-#! /bin/bash
+#!/bin/bash
 useradd -g sftpusers -d /home/sftp/$1 $1
 chown $1:sftpusers /home/sftp/$1
 # ⽂件所属⽤⼾读写执⾏，属组⽤⼾、其他⽤⼾⽆权限

@@ -135,7 +135,7 @@ mkdir -p /u01/scripts</pre></div>
 <h3>⽤⼾创建脚本</h3>
 <div class="highlight highlight-source-shell"><pre class="notranslate">vim /u01/sftpuseradd.sh
 ==========
-<span class="pl-c"><span class="pl-c">#!</span> /bin/bash</span>
+<span class="pl-c"><span class="pl-c">#!</span>/bin/bash</span>
 useradd -g sftpusers -d /home/sftp/<span class="pl-smi">$1</span> <span class="pl-smi">$1</span>
 chown <span class="pl-smi">$1</span>:sftpusers /home/sftp/<span class="pl-smi">$1</span>
 <span class="pl-c"><span class="pl-c">#</span> ⽂件所属⽤⼾读写执⾏，属组⽤⼾、其他⽤⼾⽆权限</span>
