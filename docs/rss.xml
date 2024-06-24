@@ -1,5 +1,19 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<rss xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/" version="2.0"><channel><title>DevOps Blog</title><link>https://jabinsun.github.io</link><description>好记性不如烂笔头</description><copyright>DevOps Blog</copyright><docs>http://www.rssboard.org/rss-specification</docs><generator>python-feedgen</generator><image><url>https://github.githubassets.com/favicons/favicon.svg</url><title>avatar</title><link>https://jabinsun.github.io</link></image><lastBuildDate>Mon, 24 Jun 2024 06:43:18 +0000</lastBuildDate><managingEditor>DevOps Blog</managingEditor><ttl>60</ttl><webMaster>DevOps Blog</webMaster><item><title>【shell】/etc/profile环境变量设置</title><link>https://jabinsun.github.io/post/%E3%80%90shell%E3%80%91-etc-profile-huan-jing-bian-liang-she-zhi.html</link><description>```shell&#13;
+<rss xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/" version="2.0"><channel><title>DevOps Blog</title><link>https://jabinsun.github.io</link><description>好记性不如烂笔头</description><copyright>DevOps Blog</copyright><docs>http://www.rssboard.org/rss-specification</docs><generator>python-feedgen</generator><image><url>https://github.githubassets.com/favicons/favicon.svg</url><title>avatar</title><link>https://jabinsun.github.io</link></image><lastBuildDate>Mon, 24 Jun 2024 06:48:02 +0000</lastBuildDate><managingEditor>DevOps Blog</managingEditor><ttl>60</ttl><webMaster>DevOps Blog</webMaster><item><title>【kubernetes】k8s常用示例</title><link>https://jabinsun.github.io/post/%E3%80%90kubernetes%E3%80%91k8s-chang-yong-shi-li.html</link><description>```shell&#13;
+# kubectl jsonpath usage&#13;
+kubectl get pods -n ${NAMESPACE} -o=jsonpath='{range .items[*]}[ {.metadata.name}, {.status.phase}, {.status.containerStatuses[0].state.running.startedAt} {.status.containerStatuses[0].image} ]{'\n'}{end}'&#13;
+&#13;
+kubectl get pods -n ${NAMESPACE} -o jsonpath='{.items[*].spec.containers[*].image}' | tr -s '[[:space:]]' '\n' | sort | uniq -c&#13;
+&#13;
+kubectl get pods -n ${NAMESPACE} -o jsonpath='{range .items[*]}{'\n'}{.metadata.name}{':\t'}{range .spec.containers[*]}{.image}{', '}{end}{end}' | sort&#13;
+&#13;
+# kubectl pod age usage&#13;
+kubectl get pods -A --no-headers | awk '$NF~/^[0-9]+[m|s]$/ {print $1, $2, $NF}'&#13;
+&#13;
+# kubectl cp usage&#13;
+kubectl cp -n ${NAMESPACE} ${POD}:/PATH/TO/REMOTE/FILE /PATH/TO/LOCAL/FILE&#13;
+tar cf - ${file} | kubectl exec -it -n ${NAMESPACE} ${POD} -- tar xf - -C ${path}&#13;
+```。</description><guid isPermaLink="true">https://jabinsun.github.io/post/%E3%80%90kubernetes%E3%80%91k8s-chang-yong-shi-li.html</guid><pubDate>Mon, 24 Jun 2024 06:47:43 +0000</pubDate></item><item><title>【shell】/etc/profile环境变量设置</title><link>https://jabinsun.github.io/post/%E3%80%90shell%E3%80%91-etc-profile-huan-jing-bian-liang-she-zhi.html</link><description>```shell&#13;
 vim /etc/profile&#13;
 ==========&#13;
 # login audit format&#13;
