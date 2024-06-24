@@ -7,7 +7,7 @@ kubectl get pods -n ${NAMESPACE} -o jsonpath="{.items[*].spec.containers[*].imag
 kubectl get pods -n ${NAMESPACE} -o jsonpath='{range .items[*]}{"\n"}{.metadata.name}{":\t"}{range .spec.containers[*]}{.image}{", "}{end}{end}' | sort
 
 # kubectl pod age usage
-kubectl get pods -A --no-headers | awk '$NF~/^[0-9]+[m|s]$/ {print $1, $2, $NF}'
+kubectl get pods -A --no-headers | awk '$NF~/^[0-9]+[m|s]$/ {print $1, $2, $NF}' | column -t
 
 # kubectl cp usage
 kubectl cp -n ${NAMESPACE} ${POD}:/PATH/TO/REMOTE/FILE /PATH/TO/LOCAL/FILE

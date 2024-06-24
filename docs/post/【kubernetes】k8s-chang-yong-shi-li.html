@@ -18,7 +18,7 @@ kubectl get pods -n ${NAMESPACE} -o jsonpath='{.items[*].spec.containers[*].imag
 kubectl get pods -n ${NAMESPACE} -o jsonpath='{range .items[*]}{'\n'}{.metadata.name}{':\t'}{range .spec.containers[*]}{.image}{', '}{end}{end}' | sort
 
 # kubectl pod age usage
-kubectl get pods -A --no-headers | awk '$NF~/^[0-9]+[m|s]$/ {print $1, $2, $NF}'
+kubectl get pods -A --no-headers | awk '$NF~/^[0-9]+[m|s]$/ {print $1, $2, $NF}' | column -t
 
 # kubectl cp usage
 kubectl cp -n ${NAMESPACE} ${POD}:/PATH/TO/REMOTE/FILE /PATH/TO/LOCAL/FILE
@@ -34,7 +34,7 @@ kubectl get pods -n ${NAMESPACE} -o jsonpath='{.items[*].spec.containers[*].imag
 kubectl get pods -n ${NAMESPACE} -o jsonpath='{range .items[*]}{'\n'}{.metadata.name}{':\t'}{range .spec.containers[*]}{.image}{', '}{end}{end}' | sort
 
 # kubectl pod age usage
-kubectl get pods -A --no-headers | awk '$NF~/^[0-9]+[m|s]$/ {print $1, $2, $NF}'
+kubectl get pods -A --no-headers | awk '$NF~/^[0-9]+[m|s]$/ {print $1, $2, $NF}' | column -t
 
 # kubectl cp usage
 kubectl cp -n ${NAMESPACE} ${POD}:/PATH/TO/REMOTE/FILE /PATH/TO/LOCAL/FILE
@@ -106,7 +106,7 @@ kubectl get pods -n <span class="pl-smi">${NAMESPACE}</span> -o jsonpath=<span c
 kubectl get pods -n <span class="pl-smi">${NAMESPACE}</span> -o jsonpath=<span class="pl-s"><span class="pl-pds">'</span>{range .items[*]}{"\n"}{.metadata.name}{":\t"}{range .spec.containers[*]}{.image}{", "}{end}{end}<span class="pl-pds">'</span></span> <span class="pl-k">|</span> sort
 
 <span class="pl-c"><span class="pl-c">#</span> kubectl pod age usage</span>
-kubectl get pods -A --no-headers <span class="pl-k">|</span> awk <span class="pl-s"><span class="pl-pds">'</span>$NF~/^[0-9]+[m|s]$/ {print $1, $2, $NF}<span class="pl-pds">'</span></span>
+kubectl get pods -A --no-headers <span class="pl-k">|</span> awk <span class="pl-s"><span class="pl-pds">'</span>$NF~/^[0-9]+[m|s]$/ {print $1, $2, $NF}<span class="pl-pds">'</span></span> <span class="pl-k">|</span> column -t
 
 <span class="pl-c"><span class="pl-c">#</span> kubectl cp usage</span>
 kubectl cp -n <span class="pl-smi">${NAMESPACE}</span> <span class="pl-smi">${POD}</span>:/PATH/TO/REMOTE/FILE /PATH/TO/LOCAL/FILE
