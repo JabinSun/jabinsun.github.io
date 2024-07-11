@@ -15,3 +15,10 @@ curl -XPUT 'http://localhost:9200/_settings' -H 'content-Type:application/json' 
 ```shell
 curl -XGET http://localhost:9200/_cat/indices
 ```
+
+- 删除30天之前索引
+```shell
+date=`date -d "-30 days" "+%Y.%m.%d"`
+echo $date
+/usr/bin/curl -XDELETE "http://localhost:9200/*-$date*"
+```

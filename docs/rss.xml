@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<rss xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/" version="2.0"><channel><title>DevOps Blog</title><link>https://jabinsun.github.io</link><description>好记性不如烂笔头</description><copyright>DevOps Blog</copyright><docs>http://www.rssboard.org/rss-specification</docs><generator>python-feedgen</generator><image><url>https://github.githubassets.com/favicons/favicon.svg</url><title>avatar</title><link>https://jabinsun.github.io</link></image><lastBuildDate>Mon, 24 Jun 2024 07:55:51 +0000</lastBuildDate><managingEditor>DevOps Blog</managingEditor><ttl>60</ttl><webMaster>DevOps Blog</webMaster><item><title>【mysql】mysql常用示例</title><link>https://jabinsun.github.io/post/%E3%80%90mysql%E3%80%91mysql-chang-yong-shi-li.html</link><description>```sql&#13;
+<rss xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/" version="2.0"><channel><title>DevOps Blog</title><link>https://jabinsun.github.io</link><description>好记性不如烂笔头</description><copyright>DevOps Blog</copyright><docs>http://www.rssboard.org/rss-specification</docs><generator>python-feedgen</generator><image><url>https://github.githubassets.com/favicons/favicon.svg</url><title>avatar</title><link>https://jabinsun.github.io</link></image><lastBuildDate>Thu, 11 Jul 2024 06:53:07 +0000</lastBuildDate><managingEditor>DevOps Blog</managingEditor><ttl>60</ttl><webMaster>DevOps Blog</webMaster><item><title>【mysql】mysql常用示例</title><link>https://jabinsun.github.io/post/%E3%80%90mysql%E3%80%91mysql-chang-yong-shi-li.html</link><description>```sql&#13;
 -- 得到正在执行的processlist_id&#13;
 SELECT&#13;
 	id &#13;
@@ -492,6 +492,13 @@ curl -XPUT 'http://localhost:9200/_settings' -H 'content-Type:application/json' 
 - 查看es所有索引&#13;
 ```shell&#13;
 curl -XGET http://localhost:9200/_cat/indices&#13;
+```&#13;
+&#13;
+- 删除30天之前索引&#13;
+```shell&#13;
+date=`date -d '-30 days' '+%Y.%m.%d'`&#13;
+echo $date&#13;
+/usr/bin/curl -XDELETE 'http://localhost:9200/*-$date*'&#13;
 ```。</description><guid isPermaLink="true">https://jabinsun.github.io/post/%E3%80%90elasticsearch%E3%80%91es-chang-yong-ming-ling.html</guid><pubDate>Fri, 21 Jun 2024 07:20:25 +0000</pubDate></item><item><title>【jenkins】jenkins清理多余job</title><link>https://jabinsun.github.io/post/%E3%80%90jenkins%E3%80%91jenkins-qing-li-duo-yu-job.html</link><description>```shell&#13;
 def jobName = 'item_name'&#13;
 def maxNumber = 100&#13;

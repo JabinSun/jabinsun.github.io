@@ -25,6 +25,13 @@ curl -XPUT 'http://localhost:9200/_settings' -H 'content-Type:application/json' 
 - 查看es所有索引
 ```shell
 curl -XGET http://localhost:9200/_cat/indices
+```
+
+- 删除30天之前索引
+```shell
+date=`date -d '-30 days' '+%Y.%m.%d'`
+echo $date
+/usr/bin/curl -XDELETE 'http://localhost:9200/*-$date*'
 ```。">
 <meta property="og:title" content="【elasticsearch】es常用命令">
 <meta property="og:description" content="- 检查es集群状态
@@ -43,6 +50,13 @@ curl -XPUT 'http://localhost:9200/_settings' -H 'content-Type:application/json' 
 - 查看es所有索引
 ```shell
 curl -XGET http://localhost:9200/_cat/indices
+```
+
+- 删除30天之前索引
+```shell
+date=`date -d '-30 days' '+%Y.%m.%d'`
+echo $date
+/usr/bin/curl -XDELETE 'http://localhost:9200/*-$date*'
 ```。">
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://jabinsun.github.io/post/%E3%80%90elasticsearch%E3%80%91es-chang-yong-ming-ling.html">
@@ -116,7 +130,13 @@ body{box-sizing: border-box;min-width: 200px;max-width: 900px;margin: 20px auto;
 <ul>
 <li>查看es所有索引</li>
 </ul>
-<div class="highlight highlight-source-shell"><pre class="notranslate">curl -XGET http://localhost:9200/_cat/indices</pre></div></div>
+<div class="highlight highlight-source-shell"><pre class="notranslate">curl -XGET http://localhost:9200/_cat/indices</pre></div>
+<ul>
+<li>删除30天之前索引</li>
+</ul>
+<div class="highlight highlight-source-shell"><pre class="notranslate">date=<span class="pl-s"><span class="pl-pds">`</span>date -d <span class="pl-s"><span class="pl-pds">"</span>-30 days<span class="pl-pds">"</span></span> <span class="pl-s"><span class="pl-pds">"</span>+%Y.%m.%d<span class="pl-pds">"</span></span><span class="pl-pds">`</span></span>
+<span class="pl-c1">echo</span> <span class="pl-smi">$date</span>
+/usr/bin/curl -XDELETE <span class="pl-s"><span class="pl-pds">"</span>http://localhost:9200/*-<span class="pl-smi">$date</span>*<span class="pl-pds">"</span></span></pre></div></div>
 <div style="font-size:small;margin-top:8px;float:right;">❤️ 转载文章请注明出处，谢谢！❤️</div>
 
 <button class="btn btn-block" type="button" onclick="openComments()" id="cmButton">评论</button>
