@@ -56,37 +56,29 @@ def handle_webhook(key):
             data = request.get_json()
             args = data.get('args', [])
             if not isinstance(args, list):
-                return jsonify(
-                    {
-                        'status': 'error',
-                        'error': 'Arguments should be a list'
-                    }
-                ), 400
+                return jsonify({
+                    'status': 'error',
+                    'error': 'Arguments should be a list'
+                }), 400
             command = ['sh', 'script.sh'] + args
             result = subprocess.run(command,
                                     check=True,
                                     stdout=subprocess.PIPE,
                                     stderr=subprocess.PIPE)
-            return jsonify(
-                {
-                    'status': 'success',
-                    'output': result.stdout.decode('utf-8')
-                }
-            ), 200
+            return jsonify({
+                'status': 'success',
+                'output': result.stdout.decode('utf-8')
+            }), 200
         except subprocess.CalledProcessError as e:
-            return jsonify(
-                {
-                    'status': 'error',
-                    'error': e.stderr.decode('utf-8')
-                }
-            ), 500
-    else:
-        return jsonify(
-            {
+            return jsonify({
                 'status': 'error',
-                'error': 'Invalid webhook key'
-            }
-        ), 403
+                'error': e.stderr.decode('utf-8')
+            }), 500
+    else:
+        return jsonify({
+            'status': 'error',
+            'error': 'Invalid webhook key'
+        }), 403
 
 
 if __name__ == '__main__':
@@ -140,37 +132,29 @@ def handle_webhook(key):
             data = request.get_json()
             args = data.get('args', [])
             if not isinstance(args, list):
-                return jsonify(
-                    {
-                        'status': 'error',
-                        'error': 'Arguments should be a list'
-                    }
-                ), 400
+                return jsonify({
+                    'status': 'error',
+                    'error': 'Arguments should be a list'
+                }), 400
             command = ['sh', 'script.sh'] + args
             result = subprocess.run(command,
                                     check=True,
                                     stdout=subprocess.PIPE,
                                     stderr=subprocess.PIPE)
-            return jsonify(
-                {
-                    'status': 'success',
-                    'output': result.stdout.decode('utf-8')
-                }
-            ), 200
+            return jsonify({
+                'status': 'success',
+                'output': result.stdout.decode('utf-8')
+            }), 200
         except subprocess.CalledProcessError as e:
-            return jsonify(
-                {
-                    'status': 'error',
-                    'error': e.stderr.decode('utf-8')
-                }
-            ), 500
-    else:
-        return jsonify(
-            {
+            return jsonify({
                 'status': 'error',
-                'error': 'Invalid webhook key'
-            }
-        ), 403
+                'error': e.stderr.decode('utf-8')
+            }), 500
+    else:
+        return jsonify({
+            'status': 'error',
+            'error': 'Invalid webhook key'
+        }), 403
 
 
 if __name__ == '__main__':
@@ -280,37 +264,29 @@ body{box-sizing: border-box;min-width: 200px;max-width: 900px;margin: 20px auto;
             <span class="pl-s1">data</span> <span class="pl-c1">=</span> <span class="pl-s1">request</span>.<span class="pl-en">get_json</span>()
             <span class="pl-s1">args</span> <span class="pl-c1">=</span> <span class="pl-s1">data</span>.<span class="pl-en">get</span>(<span class="pl-s">'args'</span>, [])
             <span class="pl-k">if</span> <span class="pl-c1">not</span> <span class="pl-en">isinstance</span>(<span class="pl-s1">args</span>, <span class="pl-s1">list</span>):
-                <span class="pl-k">return</span> <span class="pl-en">jsonify</span>(
-                    {
-                        <span class="pl-s">'status'</span>: <span class="pl-s">'error'</span>,
-                        <span class="pl-s">'error'</span>: <span class="pl-s">'Arguments should be a list'</span>
-                    }
-                ), <span class="pl-c1">400</span>
+                <span class="pl-k">return</span> <span class="pl-en">jsonify</span>({
+                    <span class="pl-s">'status'</span>: <span class="pl-s">'error'</span>,
+                    <span class="pl-s">'error'</span>: <span class="pl-s">'Arguments should be a list'</span>
+                }), <span class="pl-c1">400</span>
             <span class="pl-s1">command</span> <span class="pl-c1">=</span> [<span class="pl-s">'sh'</span>, <span class="pl-s">'script.sh'</span>] <span class="pl-c1">+</span> <span class="pl-s1">args</span>
             <span class="pl-s1">result</span> <span class="pl-c1">=</span> <span class="pl-s1">subprocess</span>.<span class="pl-en">run</span>(<span class="pl-s1">command</span>,
                                     <span class="pl-s1">check</span><span class="pl-c1">=</span><span class="pl-c1">True</span>,
                                     <span class="pl-s1">stdout</span><span class="pl-c1">=</span><span class="pl-s1">subprocess</span>.<span class="pl-v">PIPE</span>,
                                     <span class="pl-s1">stderr</span><span class="pl-c1">=</span><span class="pl-s1">subprocess</span>.<span class="pl-v">PIPE</span>)
-            <span class="pl-k">return</span> <span class="pl-en">jsonify</span>(
-                {
-                    <span class="pl-s">'status'</span>: <span class="pl-s">'success'</span>,
-                    <span class="pl-s">'output'</span>: <span class="pl-s1">result</span>.<span class="pl-s1">stdout</span>.<span class="pl-en">decode</span>(<span class="pl-s">'utf-8'</span>)
-                }
-            ), <span class="pl-c1">200</span>
+            <span class="pl-k">return</span> <span class="pl-en">jsonify</span>({
+                <span class="pl-s">'status'</span>: <span class="pl-s">'success'</span>,
+                <span class="pl-s">'output'</span>: <span class="pl-s1">result</span>.<span class="pl-s1">stdout</span>.<span class="pl-en">decode</span>(<span class="pl-s">'utf-8'</span>)
+            }), <span class="pl-c1">200</span>
         <span class="pl-k">except</span> <span class="pl-s1">subprocess</span>.<span class="pl-v">CalledProcessError</span> <span class="pl-k">as</span> <span class="pl-s1">e</span>:
-            <span class="pl-k">return</span> <span class="pl-en">jsonify</span>(
-                {
-                    <span class="pl-s">'status'</span>: <span class="pl-s">'error'</span>,
-                    <span class="pl-s">'error'</span>: <span class="pl-s1">e</span>.<span class="pl-s1">stderr</span>.<span class="pl-en">decode</span>(<span class="pl-s">'utf-8'</span>)
-                }
-            ), <span class="pl-c1">500</span>
-    <span class="pl-k">else</span>:
-        <span class="pl-k">return</span> <span class="pl-en">jsonify</span>(
-            {
+            <span class="pl-k">return</span> <span class="pl-en">jsonify</span>({
                 <span class="pl-s">'status'</span>: <span class="pl-s">'error'</span>,
-                <span class="pl-s">'error'</span>: <span class="pl-s">'Invalid webhook key'</span>
-            }
-        ), <span class="pl-c1">403</span>
+                <span class="pl-s">'error'</span>: <span class="pl-s1">e</span>.<span class="pl-s1">stderr</span>.<span class="pl-en">decode</span>(<span class="pl-s">'utf-8'</span>)
+            }), <span class="pl-c1">500</span>
+    <span class="pl-k">else</span>:
+        <span class="pl-k">return</span> <span class="pl-en">jsonify</span>({
+            <span class="pl-s">'status'</span>: <span class="pl-s">'error'</span>,
+            <span class="pl-s">'error'</span>: <span class="pl-s">'Invalid webhook key'</span>
+        }), <span class="pl-c1">403</span>
 
 
 <span class="pl-k">if</span> <span class="pl-s1">__name__</span> <span class="pl-c1">==</span> <span class="pl-s">'__main__'</span>:

@@ -45,37 +45,29 @@ def handle_webhook(key):
             data = request.get_json()
             args = data.get('args', [])
             if not isinstance(args, list):
-                return jsonify(
-                    {
-                        'status': 'error',
-                        'error': 'Arguments should be a list'
-                    }
-                ), 400
+                return jsonify({
+                    'status': 'error',
+                    'error': 'Arguments should be a list'
+                }), 400
             command = ['sh', 'script.sh'] + args
             result = subprocess.run(command,
                                     check=True,
                                     stdout=subprocess.PIPE,
                                     stderr=subprocess.PIPE)
-            return jsonify(
-                {
-                    'status': 'success',
-                    'output': result.stdout.decode('utf-8')
-                }
-            ), 200
+            return jsonify({
+                'status': 'success',
+                'output': result.stdout.decode('utf-8')
+            }), 200
         except subprocess.CalledProcessError as e:
-            return jsonify(
-                {
-                    'status': 'error',
-                    'error': e.stderr.decode('utf-8')
-                }
-            ), 500
-    else:
-        return jsonify(
-            {
+            return jsonify({
                 'status': 'error',
-                'error': 'Invalid webhook key'
-            }
-        ), 403
+                'error': e.stderr.decode('utf-8')
+            }), 500
+    else:
+        return jsonify({
+            'status': 'error',
+            'error': 'Invalid webhook key'
+        }), 403
 
 
 if __name__ == '__main__':
