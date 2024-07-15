@@ -1,9 +1,10 @@
 ```python
-from flask import Flask, jsonify
-import subprocess
-import uuid
 import json
 import os
+import subprocess
+import uuid
+
+from flask import Flask, jsonify, request
 
 app = Flask(__name__)
 
@@ -30,22 +31,51 @@ def get_webhook_key():
     key = str(uuid.uuid4())
     webhook_keys[key] = True
     save_webhook_keys(webhook_keys)
-    return jsonify({'webhook_key': key})
+    return jsonify(
+        {
+            'webhook_key': key
+        }
+    )
 
 
 @app.route('/webhook/<key>', methods=['POST'])
 def handle_webhook(key):
     if key in webhook_keys:
         try:
-            result = subprocess.run(['sh', 'script.sh'],
+            data = request.get_json()
+            args = data.get('args', [])
+            if not isinstance(args, list):
+                return jsonify(
+                    {
+                        'status': 'error',
+                        'error': 'Arguments should be a list'
+                    }
+                ), 400
+            command = ['sh', 'script.sh'] + args
+            result = subprocess.run(command,
                                     check=True,
                                     stdout=subprocess.PIPE,
                                     stderr=subprocess.PIPE)
-            return jsonify({'status': 'success', 'output': result.stdout.decode('utf-8')})
+            return jsonify(
+                {
+                    'status': 'success',
+                    'output': result.stdout.decode('utf-8')
+                }
+            ), 200
         except subprocess.CalledProcessError as e:
-            return jsonify({'status': 'error', 'error': e.stderr.decode('utf-8')}), 500
+            return jsonify(
+                {
+                    'status': 'error',
+                    'error': e.stderr.decode('utf-8')
+                }
+            ), 500
     else:
-        return jsonify({'status': 'error', 'error': 'Invalid webhook key'}), 403
+        return jsonify(
+            {
+                'status': 'error',
+                'error': 'Invalid webhook key'
+            }
+        ), 403
 
 
 if __name__ == '__main__':

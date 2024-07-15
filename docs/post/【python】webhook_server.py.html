@@ -10,11 +10,12 @@
         document.documentElement.setAttribute("data-color-mode", theme);
     </script>
 <meta name="description" content="```python
-from flask import Flask, jsonify
-import subprocess
-import uuid
 import json
 import os
+import subprocess
+import uuid
+
+from flask import Flask, jsonify, request
 
 app = Flask(__name__)
 
@@ -41,22 +42,51 @@ def get_webhook_key():
     key = str(uuid.uuid4())
     webhook_keys[key] = True
     save_webhook_keys(webhook_keys)
-    return jsonify({'webhook_key': key})
+    return jsonify(
+        {
+            'webhook_key': key
+        }
+    )
 
 
 @app.route('/webhook/<key>', methods=['POST'])
 def handle_webhook(key):
     if key in webhook_keys:
         try:
-            result = subprocess.run(['sh', 'script.sh'],
+            data = request.get_json()
+            args = data.get('args', [])
+            if not isinstance(args, list):
+                return jsonify(
+                    {
+                        'status': 'error',
+                        'error': 'Arguments should be a list'
+                    }
+                ), 400
+            command = ['sh', 'script.sh'] + args
+            result = subprocess.run(command,
                                     check=True,
                                     stdout=subprocess.PIPE,
                                     stderr=subprocess.PIPE)
-            return jsonify({'status': 'success', 'output': result.stdout.decode('utf-8')})
+            return jsonify(
+                {
+                    'status': 'success',
+                    'output': result.stdout.decode('utf-8')
+                }
+            ), 200
         except subprocess.CalledProcessError as e:
-            return jsonify({'status': 'error', 'error': e.stderr.decode('utf-8')}), 500
+            return jsonify(
+                {
+                    'status': 'error',
+                    'error': e.stderr.decode('utf-8')
+                }
+            ), 500
     else:
-        return jsonify({'status': 'error', 'error': 'Invalid webhook key'}), 403
+        return jsonify(
+            {
+                'status': 'error',
+                'error': 'Invalid webhook key'
+            }
+        ), 403
 
 
 if __name__ == '__main__':
@@ -64,11 +94,12 @@ if __name__ == '__main__':
 ```。">
 <meta property="og:title" content="【python】webhook_server.py">
 <meta property="og:description" content="```python
-from flask import Flask, jsonify
-import subprocess
-import uuid
 import json
 import os
+import subprocess
+import uuid
+
+from flask import Flask, jsonify, request
 
 app = Flask(__name__)
 
@@ -95,22 +126,51 @@ def get_webhook_key():
     key = str(uuid.uuid4())
     webhook_keys[key] = True
     save_webhook_keys(webhook_keys)
-    return jsonify({'webhook_key': key})
+    return jsonify(
+        {
+            'webhook_key': key
+        }
+    )
 
 
 @app.route('/webhook/<key>', methods=['POST'])
 def handle_webhook(key):
     if key in webhook_keys:
         try:
-            result = subprocess.run(['sh', 'script.sh'],
+            data = request.get_json()
+            args = data.get('args', [])
+            if not isinstance(args, list):
+                return jsonify(
+                    {
+                        'status': 'error',
+                        'error': 'Arguments should be a list'
+                    }
+                ), 400
+            command = ['sh', 'script.sh'] + args
+            result = subprocess.run(command,
                                     check=True,
                                     stdout=subprocess.PIPE,
                                     stderr=subprocess.PIPE)
-            return jsonify({'status': 'success', 'output': result.stdout.decode('utf-8')})
+            return jsonify(
+                {
+                    'status': 'success',
+                    'output': result.stdout.decode('utf-8')
+                }
+            ), 200
         except subprocess.CalledProcessError as e:
-            return jsonify({'status': 'error', 'error': e.stderr.decode('utf-8')}), 500
+            return jsonify(
+                {
+                    'status': 'error',
+                    'error': e.stderr.decode('utf-8')
+                }
+            ), 500
     else:
-        return jsonify({'status': 'error', 'error': 'Invalid webhook key'}), 403
+        return jsonify(
+            {
+                'status': 'error',
+                'error': 'Invalid webhook key'
+            }
+        ), 403
 
 
 if __name__ == '__main__':
@@ -174,11 +234,12 @@ body{box-sizing: border-box;min-width: 200px;max-width: 900px;margin: 20px auto;
 </div>
 </div>
     <div id="content">
-<div class="markdown-body" id="postBody"><div class="highlight highlight-source-python"><pre class="notranslate"><span class="pl-k">from</span> <span class="pl-s1">flask</span> <span class="pl-k">import</span> <span class="pl-v">Flask</span>, <span class="pl-s1">jsonify</span>
+<div class="markdown-body" id="postBody"><div class="highlight highlight-source-python"><pre class="notranslate"><span class="pl-k">import</span> <span class="pl-s1">json</span>
+<span class="pl-k">import</span> <span class="pl-s1">os</span>
 <span class="pl-k">import</span> <span class="pl-s1">subprocess</span>
 <span class="pl-k">import</span> <span class="pl-s1">uuid</span>
-<span class="pl-k">import</span> <span class="pl-s1">json</span>
-<span class="pl-k">import</span> <span class="pl-s1">os</span>
+
+<span class="pl-k">from</span> <span class="pl-s1">flask</span> <span class="pl-k">import</span> <span class="pl-v">Flask</span>, <span class="pl-s1">jsonify</span>, <span class="pl-s1">request</span>
 
 <span class="pl-s1">app</span> <span class="pl-c1">=</span> <span class="pl-v">Flask</span>(<span class="pl-s1">__name__</span>)
 
@@ -205,22 +266,51 @@ body{box-sizing: border-box;min-width: 200px;max-width: 900px;margin: 20px auto;
     <span class="pl-s1">key</span> <span class="pl-c1">=</span> <span class="pl-en">str</span>(<span class="pl-s1">uuid</span>.<span class="pl-en">uuid4</span>())
     <span class="pl-s1">webhook_keys</span>[<span class="pl-s1">key</span>] <span class="pl-c1">=</span> <span class="pl-c1">True</span>
     <span class="pl-en">save_webhook_keys</span>(<span class="pl-s1">webhook_keys</span>)
-    <span class="pl-k">return</span> <span class="pl-en">jsonify</span>({<span class="pl-s">'webhook_key'</span>: <span class="pl-s1">key</span>})
+    <span class="pl-k">return</span> <span class="pl-en">jsonify</span>(
+        {
+            <span class="pl-s">'webhook_key'</span>: <span class="pl-s1">key</span>
+        }
+    )
 
 
 <span class="pl-en">@<span class="pl-s1">app</span>.<span class="pl-en">route</span>(<span class="pl-s">'/webhook/&lt;key&gt;'</span>, <span class="pl-s1">methods</span><span class="pl-c1">=</span>[<span class="pl-s">'POST'</span>])</span>
 <span class="pl-k">def</span> <span class="pl-en">handle_webhook</span>(<span class="pl-s1">key</span>):
     <span class="pl-k">if</span> <span class="pl-s1">key</span> <span class="pl-c1">in</span> <span class="pl-s1">webhook_keys</span>:
         <span class="pl-k">try</span>:
-            <span class="pl-s1">result</span> <span class="pl-c1">=</span> <span class="pl-s1">subprocess</span>.<span class="pl-en">run</span>([<span class="pl-s">'sh'</span>, <span class="pl-s">'script.sh'</span>],
+            <span class="pl-s1">data</span> <span class="pl-c1">=</span> <span class="pl-s1">request</span>.<span class="pl-en">get_json</span>()
+            <span class="pl-s1">args</span> <span class="pl-c1">=</span> <span class="pl-s1">data</span>.<span class="pl-en">get</span>(<span class="pl-s">'args'</span>, [])
+            <span class="pl-k">if</span> <span class="pl-c1">not</span> <span class="pl-en">isinstance</span>(<span class="pl-s1">args</span>, <span class="pl-s1">list</span>):
+                <span class="pl-k">return</span> <span class="pl-en">jsonify</span>(
+                    {
+                        <span class="pl-s">'status'</span>: <span class="pl-s">'error'</span>,
+                        <span class="pl-s">'error'</span>: <span class="pl-s">'Arguments should be a list'</span>
+                    }
+                ), <span class="pl-c1">400</span>
+            <span class="pl-s1">command</span> <span class="pl-c1">=</span> [<span class="pl-s">'sh'</span>, <span class="pl-s">'script.sh'</span>] <span class="pl-c1">+</span> <span class="pl-s1">args</span>
+            <span class="pl-s1">result</span> <span class="pl-c1">=</span> <span class="pl-s1">subprocess</span>.<span class="pl-en">run</span>(<span class="pl-s1">command</span>,
                                     <span class="pl-s1">check</span><span class="pl-c1">=</span><span class="pl-c1">True</span>,
                                     <span class="pl-s1">stdout</span><span class="pl-c1">=</span><span class="pl-s1">subprocess</span>.<span class="pl-v">PIPE</span>,
                                     <span class="pl-s1">stderr</span><span class="pl-c1">=</span><span class="pl-s1">subprocess</span>.<span class="pl-v">PIPE</span>)
-            <span class="pl-k">return</span> <span class="pl-en">jsonify</span>({<span class="pl-s">'status'</span>: <span class="pl-s">'success'</span>, <span class="pl-s">'output'</span>: <span class="pl-s1">result</span>.<span class="pl-s1">stdout</span>.<span class="pl-en">decode</span>(<span class="pl-s">'utf-8'</span>)})
+            <span class="pl-k">return</span> <span class="pl-en">jsonify</span>(
+                {
+                    <span class="pl-s">'status'</span>: <span class="pl-s">'success'</span>,
+                    <span class="pl-s">'output'</span>: <span class="pl-s1">result</span>.<span class="pl-s1">stdout</span>.<span class="pl-en">decode</span>(<span class="pl-s">'utf-8'</span>)
+                }
+            ), <span class="pl-c1">200</span>
         <span class="pl-k">except</span> <span class="pl-s1">subprocess</span>.<span class="pl-v">CalledProcessError</span> <span class="pl-k">as</span> <span class="pl-s1">e</span>:
-            <span class="pl-k">return</span> <span class="pl-en">jsonify</span>({<span class="pl-s">'status'</span>: <span class="pl-s">'error'</span>, <span class="pl-s">'error'</span>: <span class="pl-s1">e</span>.<span class="pl-s1">stderr</span>.<span class="pl-en">decode</span>(<span class="pl-s">'utf-8'</span>)}), <span class="pl-c1">500</span>
+            <span class="pl-k">return</span> <span class="pl-en">jsonify</span>(
+                {
+                    <span class="pl-s">'status'</span>: <span class="pl-s">'error'</span>,
+                    <span class="pl-s">'error'</span>: <span class="pl-s1">e</span>.<span class="pl-s1">stderr</span>.<span class="pl-en">decode</span>(<span class="pl-s">'utf-8'</span>)
+                }
+            ), <span class="pl-c1">500</span>
     <span class="pl-k">else</span>:
-        <span class="pl-k">return</span> <span class="pl-en">jsonify</span>({<span class="pl-s">'status'</span>: <span class="pl-s">'error'</span>, <span class="pl-s">'error'</span>: <span class="pl-s">'Invalid webhook key'</span>}), <span class="pl-c1">403</span>
+        <span class="pl-k">return</span> <span class="pl-en">jsonify</span>(
+            {
+                <span class="pl-s">'status'</span>: <span class="pl-s">'error'</span>,
+                <span class="pl-s">'error'</span>: <span class="pl-s">'Invalid webhook key'</span>
+            }
+        ), <span class="pl-c1">403</span>
 
 
 <span class="pl-k">if</span> <span class="pl-s1">__name__</span> <span class="pl-c1">==</span> <span class="pl-s">'__main__'</span>:
