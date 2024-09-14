@@ -46,7 +46,7 @@ def handle_webhook(key):
                                     check=True,
                                     stdout=subprocess.PIPE,
                                     stderr=subprocess.PIPE)
-            return jsonify({'status': 'success', 'output': result.stdout.decode('utf-8')}), 200
+            return jsonify({'status': 'success', 'output': result.stdout.decode('utf-8').splitlines()}), 200
         except subprocess.CalledProcessError as e:
             return jsonify({'status': 'error', 'error': e.stderr.decode('utf-8')}), 500
     else:
