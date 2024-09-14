@@ -31,45 +31,28 @@ def get_webhook_key():
     key = str(uuid.uuid4())
     webhook_keys[key] = True
     save_webhook_keys(webhook_keys)
-    return jsonify(
-        {
-            'webhook_key': key
-        }
-    )
+    return jsonify({'webhook_key': key}), 200
 
 
 @app.route('/webhook/<key>', methods=['POST'])
 def handle_webhook(key):
-    if key in webhook_keys:
+    if key in webhook_keys and webhook_keys[key] is True:
         try:
             data = request.get_json()
-            args = data.get('args', [])
+            args = data.get('shell', [])
             if not isinstance(args, list):
-                return jsonify({
-                    'status': 'error',
-                    'error': 'Arguments should be a list'
-                }), 400
-            command = ['sh', 'script.sh'] + args
-            result = subprocess.run(command,
+                return jsonify({'status': 'error', 'error': 'Arguments should be a list'}), 400
+            result = subprocess.run(args,
                                     check=True,
                                     stdout=subprocess.PIPE,
                                     stderr=subprocess.PIPE)
-            return jsonify({
-                'status': 'success',
-                'output': result.stdout.decode('utf-8')
-            }), 200
+            return jsonify({'status': 'success', 'output': result.stdout.decode('utf-8')}), 200
         except subprocess.CalledProcessError as e:
-            return jsonify({
-                'status': 'error',
-                'error': e.stderr.decode('utf-8')
-            }), 500
+            return jsonify({'status': 'error', 'error': e.stderr.decode('utf-8')}), 500
     else:
-        return jsonify({
-            'status': 'error',
-            'error': 'Invalid webhook key'
-        }), 403
+        return jsonify({'status': 'error', 'error': 'Invalid webhook key'}), 403
 
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=5000)
+    app.run(host='0.0.0.0')
 ```
