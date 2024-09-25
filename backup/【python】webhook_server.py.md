@@ -8,7 +8,8 @@ from flask import Flask, jsonify, request
 
 app = Flask(__name__)
 
-WEBHOOK_KEYS_FILE = '.webhook_keys.json'
+#WEBHOOK_KEYS_FILE = '.webhook_keys.json'
+WEBHOOK_KEYS_FILE = os.environ.get('WEBHOOK_KEYS_FILE', '.webhook_keys.json')
 
 
 def load_webhook_keys():
