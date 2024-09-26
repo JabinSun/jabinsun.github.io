@@ -183,7 +183,7 @@ POST _reindex?wait_for_completion=false
 {
   "source": {
     "remote": {
-      "host": "http://10.1.72.33:9200",
+      "host": "http://10.1.2.3:9200",
       "username": "elastic",
       "password": "asdf1234"
     },
