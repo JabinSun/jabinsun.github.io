@@ -1,4 +1,7 @@
 ```shell
+# 通过/var/lib/docker/overlay2/*查找哪个pod占用磁盘较大
+docker ps -aq | xargs -n 1 docker inspect --format '{{.Id}}, {{.Name}}, {{.GraphDriver.Data.WorkDir}}' | grep "6570df2379ab10da3c4a2984212ed8fa5841dc194fc3adf964f0f5c4dec7520b"
+
 # kubectl jsonpath usage
 kubectl get pods -n ${NAMESPACE} -o=jsonpath='{range .items[*]}[ {.metadata.name}, {.status.phase}, {.status.containerStatuses[0].state.running.startedAt} {.status.containerStatuses[0].image} ]{"\n"}{end}'
 
