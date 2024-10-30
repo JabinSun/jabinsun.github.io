@@ -1,4 +1,7 @@
 ```shell
+# 查看k8s某个节点requests和limits
+kubectl get pods --all-namespaces -o json | jq -c '.items[] | select(.spec.nodeName=="${NODENAME}") | {name: .metadata.name, namespace: .metadata.namespace, containers: .spec.containers[].resources}'
+
 # 通过/var/lib/docker/overlay2/*查找哪个pod占用磁盘较大
 docker ps -aq | xargs -n 1 docker inspect --format '{{.Id}}, {{.Name}}, {{.GraphDriver.Data.WorkDir}}' | grep "6570df2379ab10da3c4a2984212ed8fa5841dc194fc3adf964f0f5c4dec7520b"
 
