@@ -14,15 +14,15 @@
 #!/bin/bash
 
 log::error() {
-  printf '[$(date +'%Y-%m-%dT%H:%M:%S.%2N%z')] - [\033[0;31mERROR\033[0m] %s\n' '$@'
+  printf '[$(date +'%Y-%m-%dT%H:%M:%S.%2N%z')] - [\033[0;31mERROR\033[0m] - %s\n' '$@'  
 }
 
 log::info() {
-  printf '[$(date +'%Y-%m-%dT%H:%M:%S.%2N%z')] - [\033[0;32mINFO\033[0m] %s\n' '$@'
+  printf '[$(date +'%Y-%m-%dT%H:%M:%S.%2N%z')] - [\033[0;32mINFO\033[0m] - %s\n' '$@'   
 }
 
 log::warning() {
-  printf '[$(date +'%Y-%m-%dT%H:%M:%S.%2N%z')] - [\033[1;33mWARNING\033[0m] %s\n' '$@'
+  printf '[$(date +'%Y-%m-%dT%H:%M:%S.%2N%z')] - [\033[1;33mWARNING\033[0m] - %s\n' '$@'
 }
 
 log::info 'This is an informational message.'
@@ -34,15 +34,15 @@ log::error 'This is an error message.'
 #!/bin/bash
 
 log::error() {
-  printf '[$(date +'%Y-%m-%dT%H:%M:%S.%2N%z')] - [\033[0;31mERROR\033[0m] %s\n' '$@'
+  printf '[$(date +'%Y-%m-%dT%H:%M:%S.%2N%z')] - [\033[0;31mERROR\033[0m] - %s\n' '$@'  
 }
 
 log::info() {
-  printf '[$(date +'%Y-%m-%dT%H:%M:%S.%2N%z')] - [\033[0;32mINFO\033[0m] %s\n' '$@'
+  printf '[$(date +'%Y-%m-%dT%H:%M:%S.%2N%z')] - [\033[0;32mINFO\033[0m] - %s\n' '$@'   
 }
 
 log::warning() {
-  printf '[$(date +'%Y-%m-%dT%H:%M:%S.%2N%z')] - [\033[1;33mWARNING\033[0m] %s\n' '$@'
+  printf '[$(date +'%Y-%m-%dT%H:%M:%S.%2N%z')] - [\033[1;33mWARNING\033[0m] - %s\n' '$@'
 }
 
 log::info 'This is an informational message.'
@@ -122,15 +122,15 @@ body{box-sizing: border-box;min-width: 200px;max-width: 900px;margin: 20px auto;
 <div class="markdown-body" id="postBody"><div class="highlight highlight-source-shell"><pre class="notranslate"><span class="pl-c"><span class="pl-c">#!</span>/bin/bash</span>
 
 <span class="pl-en">log::error</span>() {
-  <span class="pl-c1">printf</span> <span class="pl-s"><span class="pl-pds">"</span>[<span class="pl-s"><span class="pl-pds">$(</span>date +<span class="pl-s"><span class="pl-pds">'</span>%Y-%m-%dT%H:%M:%S.%2N%z<span class="pl-pds">'</span></span><span class="pl-pds">)</span></span>] - [\033[0;31mERROR\033[0m] %s\n<span class="pl-pds">"</span></span> <span class="pl-s"><span class="pl-pds">"</span><span class="pl-smi">$@</span><span class="pl-pds">"</span></span>
+  <span class="pl-c1">printf</span> <span class="pl-s"><span class="pl-pds">"</span>[<span class="pl-s"><span class="pl-pds">$(</span>date +<span class="pl-s"><span class="pl-pds">'</span>%Y-%m-%dT%H:%M:%S.%2N%z<span class="pl-pds">'</span></span><span class="pl-pds">)</span></span>] - [\033[0;31mERROR\033[0m] - %s\n<span class="pl-pds">"</span></span> <span class="pl-s"><span class="pl-pds">"</span><span class="pl-smi">$@</span><span class="pl-pds">"</span></span>  
 }
 
 <span class="pl-en">log::info</span>() {
-  <span class="pl-c1">printf</span> <span class="pl-s"><span class="pl-pds">"</span>[<span class="pl-s"><span class="pl-pds">$(</span>date +<span class="pl-s"><span class="pl-pds">'</span>%Y-%m-%dT%H:%M:%S.%2N%z<span class="pl-pds">'</span></span><span class="pl-pds">)</span></span>] - [\033[0;32mINFO\033[0m] %s\n<span class="pl-pds">"</span></span> <span class="pl-s"><span class="pl-pds">"</span><span class="pl-smi">$@</span><span class="pl-pds">"</span></span>
+  <span class="pl-c1">printf</span> <span class="pl-s"><span class="pl-pds">"</span>[<span class="pl-s"><span class="pl-pds">$(</span>date +<span class="pl-s"><span class="pl-pds">'</span>%Y-%m-%dT%H:%M:%S.%2N%z<span class="pl-pds">'</span></span><span class="pl-pds">)</span></span>] - [\033[0;32mINFO\033[0m] - %s\n<span class="pl-pds">"</span></span> <span class="pl-s"><span class="pl-pds">"</span><span class="pl-smi">$@</span><span class="pl-pds">"</span></span>   
 }
 
 <span class="pl-en">log::warning</span>() {
-  <span class="pl-c1">printf</span> <span class="pl-s"><span class="pl-pds">"</span>[<span class="pl-s"><span class="pl-pds">$(</span>date +<span class="pl-s"><span class="pl-pds">'</span>%Y-%m-%dT%H:%M:%S.%2N%z<span class="pl-pds">'</span></span><span class="pl-pds">)</span></span>] - [\033[1;33mWARNING\033[0m] %s\n<span class="pl-pds">"</span></span> <span class="pl-s"><span class="pl-pds">"</span><span class="pl-smi">$@</span><span class="pl-pds">"</span></span>
+  <span class="pl-c1">printf</span> <span class="pl-s"><span class="pl-pds">"</span>[<span class="pl-s"><span class="pl-pds">$(</span>date +<span class="pl-s"><span class="pl-pds">'</span>%Y-%m-%dT%H:%M:%S.%2N%z<span class="pl-pds">'</span></span><span class="pl-pds">)</span></span>] - [\033[1;33mWARNING\033[0m] - %s\n<span class="pl-pds">"</span></span> <span class="pl-s"><span class="pl-pds">"</span><span class="pl-smi">$@</span><span class="pl-pds">"</span></span>
 }
 
 log::info <span class="pl-s"><span class="pl-pds">"</span>This is an informational message.<span class="pl-pds">"</span></span>

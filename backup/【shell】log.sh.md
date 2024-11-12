@@ -2,15 +2,15 @@
 #!/bin/bash
 
 log::error() {
-  printf "[$(date +'%Y-%m-%dT%H:%M:%S.%2N%z')] - [\033[0;31mERROR\033[0m] %s\n" "$@"
+  printf "[$(date +'%Y-%m-%dT%H:%M:%S.%2N%z')] - [\033[0;31mERROR\033[0m] - %s\n" "$@"  
 }
 
 log::info() {
-  printf "[$(date +'%Y-%m-%dT%H:%M:%S.%2N%z')] - [\033[0;32mINFO\033[0m] %s\n" "$@"
+  printf "[$(date +'%Y-%m-%dT%H:%M:%S.%2N%z')] - [\033[0;32mINFO\033[0m] - %s\n" "$@"   
 }
 
 log::warning() {
-  printf "[$(date +'%Y-%m-%dT%H:%M:%S.%2N%z')] - [\033[1;33mWARNING\033[0m] %s\n" "$@"
+  printf "[$(date +'%Y-%m-%dT%H:%M:%S.%2N%z')] - [\033[1;33mWARNING\033[0m] - %s\n" "$@"
 }
 
 log::info "This is an informational message."
