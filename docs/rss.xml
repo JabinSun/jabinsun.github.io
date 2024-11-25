@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<rss xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/" version="2.0"><channel><title>DevOps Blog</title><link>https://jabinsun.github.io</link><description>好记性不如烂笔头</description><copyright>DevOps Blog</copyright><docs>http://www.rssboard.org/rss-specification</docs><generator>python-feedgen</generator><image><url>https://github.githubassets.com/favicons/favicon.svg</url><title>avatar</title><link>https://jabinsun.github.io</link></image><lastBuildDate>Tue, 12 Nov 2024 02:40:28 +0000</lastBuildDate><managingEditor>DevOps Blog</managingEditor><ttl>60</ttl><webMaster>DevOps Blog</webMaster><item><title>【shell】log.sh</title><link>https://jabinsun.github.io/post/%E3%80%90shell%E3%80%91log.sh.html</link><description>```shell&#13;
+<rss xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/" version="2.0"><channel><title>DevOps Blog</title><link>https://jabinsun.github.io</link><description>好记性不如烂笔头</description><copyright>DevOps Blog</copyright><docs>http://www.rssboard.org/rss-specification</docs><generator>python-feedgen</generator><image><url>https://github.githubassets.com/favicons/favicon.svg</url><title>avatar</title><link>https://jabinsun.github.io</link></image><lastBuildDate>Mon, 25 Nov 2024 02:29:34 +0000</lastBuildDate><managingEditor>DevOps Blog</managingEditor><ttl>60</ttl><webMaster>DevOps Blog</webMaster><item><title>【shell】log.sh</title><link>https://jabinsun.github.io/post/%E3%80%90shell%E3%80%91log.sh.html</link><description>```shell&#13;
 #!/bin/bash&#13;
 &#13;
 log::error() {&#13;
@@ -104,6 +104,9 @@ db.test.find({eId: 'xxx'});&#13;
 db.serverStatus().wiredTiger.cache['maximum bytes configured'];&#13;
 db.serverStatus().wiredTiger.cache['bytes currently in the cache'];&#13;
 ```。</description><guid isPermaLink="true">https://jabinsun.github.io/post/%E3%80%90mongodb%E3%80%91mongodb-chang-yong-shi-li.html</guid><pubDate>Mon, 24 Jun 2024 06:51:19 +0000</pubDate></item><item><title>【kubernetes】k8s常用示例</title><link>https://jabinsun.github.io/post/%E3%80%90kubernetes%E3%80%91k8s-chang-yong-shi-li.html</link><description>```shell&#13;
+# 查看k8s pod上次重启日志&#13;
+kubectl logs -f ${POD} --tail 100 --previous&#13;
+&#13;
 # 查看k8s某个节点requests和limits&#13;
 kubectl get pods --all-namespaces -o json | jq -c '.items[] | select(.spec.nodeName=='${NODENAME}') | {name: .metadata.name, namespace: .metadata.namespace, containers: .spec.containers[].resources}'&#13;
 &#13;

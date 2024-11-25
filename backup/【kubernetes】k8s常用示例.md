@@ -1,4 +1,7 @@
 ```shell
+# 查看k8s pod上次重启日志
+kubectl logs -f ${POD} --tail 100 --previous
+
 # 查看k8s某个节点requests和limits
 kubectl get pods --all-namespaces -o json | jq -c '.items[] | select(.spec.nodeName=="${NODENAME}") | {name: .metadata.name, namespace: .metadata.namespace, containers: .spec.containers[].resources}'
 
