@@ -1,4 +1,7 @@
 ```shell
+# 查看k8s node节点有哪些pod
+kubectl get pods --all-namespaces -o wide --field-selector spec.nodeName=${NODENAME}
+
 # 查看k8s pod上次重启日志
 kubectl logs -f ${POD} --tail 100 --previous
 
