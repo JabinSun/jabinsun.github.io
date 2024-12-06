@@ -180,13 +180,13 @@ body{box-sizing: border-box;min-width: 200px;max-width: 900px;margin: 20px auto;
 
 
 <span class="pl-k">def</span> <span class="pl-en">get_certificate_expiry_date</span>(<span class="pl-s1">hostname</span>):
-    <span class="pl-s1">context</span> <span class="pl-c1">=</span> <span class="pl-s1">ssl</span>.<span class="pl-en">create_default_context</span>()
-    <span class="pl-s1">conn</span> <span class="pl-c1">=</span> <span class="pl-s1">context</span>.<span class="pl-en">wrap_socket</span>(<span class="pl-s1">socket</span>.<span class="pl-en">socket</span>(<span class="pl-s1">socket</span>.<span class="pl-v">AF_INET</span>), <span class="pl-s1">server_hostname</span><span class="pl-c1">=</span><span class="pl-s1">hostname</span>)
-    <span class="pl-s1">conn</span>.<span class="pl-en">settimeout</span>(<span class="pl-c1">5.0</span>)
-    <span class="pl-s1">conn</span>.<span class="pl-en">connect</span>((<span class="pl-s1">hostname</span>, <span class="pl-c1">443</span>))
-    <span class="pl-s1">cert</span> <span class="pl-c1">=</span> <span class="pl-s1">conn</span>.<span class="pl-en">getpeercert</span>()
-    <span class="pl-s1">conn</span>.<span class="pl-en">close</span>()
-    <span class="pl-s1">cert_expiry_date</span> <span class="pl-c1">=</span> <span class="pl-s1">datetime</span>.<span class="pl-s1">datetime</span>.<span class="pl-en">strptime</span>(<span class="pl-s1">cert</span>[<span class="pl-s">'notAfter'</span>], <span class="pl-s">'%b %d %H:%M:%S %Y GMT'</span>)
+    <span class="pl-s1">context</span> <span class="pl-c1">=</span> <span class="pl-s1">ssl</span>.<span class="pl-c1">create_default_context</span>()
+    <span class="pl-s1">conn</span> <span class="pl-c1">=</span> <span class="pl-s1">context</span>.<span class="pl-c1">wrap_socket</span>(<span class="pl-s1">socket</span>.<span class="pl-c1">socket</span>(<span class="pl-s1">socket</span>.<span class="pl-c1">AF_INET</span>), <span class="pl-s1">server_hostname</span><span class="pl-c1">=</span><span class="pl-s1">hostname</span>)
+    <span class="pl-s1">conn</span>.<span class="pl-c1">settimeout</span>(<span class="pl-c1">5.0</span>)
+    <span class="pl-s1">conn</span>.<span class="pl-c1">connect</span>((<span class="pl-s1">hostname</span>, <span class="pl-c1">443</span>))
+    <span class="pl-s1">cert</span> <span class="pl-c1">=</span> <span class="pl-s1">conn</span>.<span class="pl-c1">getpeercert</span>()
+    <span class="pl-s1">conn</span>.<span class="pl-c1">close</span>()
+    <span class="pl-s1">cert_expiry_date</span> <span class="pl-c1">=</span> <span class="pl-s1">datetime</span>.<span class="pl-c1">datetime</span>.<span class="pl-c1">strptime</span>(<span class="pl-s1">cert</span>[<span class="pl-s">'notAfter'</span>], <span class="pl-s">'%b %d %H:%M:%S %Y GMT'</span>)
     <span class="pl-k">return</span> <span class="pl-s1">cert_expiry_date</span>
 
 
@@ -198,25 +198,25 @@ body{box-sizing: border-box;min-width: 200px;max-width: 900px;margin: 20px auto;
         <span class="pl-en">print</span>(<span class="pl-s">f"<span class="pl-s1"><span class="pl-kos">{</span><span class="pl-s1">domain</span><span class="pl-kos">}</span></span>: <span class="pl-s1"><span class="pl-kos">{</span><span class="pl-s1">e</span><span class="pl-kos">}</span></span>"</span>)
 
 
-<span class="pl-s1">workbook</span> <span class="pl-c1">=</span> <span class="pl-s1">openpyxl</span>.<span class="pl-v">Workbook</span>()
-<span class="pl-s1">sheet</span> <span class="pl-c1">=</span> <span class="pl-s1">workbook</span>.<span class="pl-s1">active</span>
-<span class="pl-s1">sheet</span>.<span class="pl-s1">title</span> <span class="pl-c1">=</span> <span class="pl-s">'HTTPS 证书到期时间'</span>
+<span class="pl-s1">workbook</span> <span class="pl-c1">=</span> <span class="pl-s1">openpyxl</span>.<span class="pl-c1">Workbook</span>()
+<span class="pl-s1">sheet</span> <span class="pl-c1">=</span> <span class="pl-s1">workbook</span>.<span class="pl-c1">active</span>
+<span class="pl-s1">sheet</span>.<span class="pl-c1">title</span> <span class="pl-c1">=</span> <span class="pl-s">'HTTPS 证书到期时间'</span>
 <span class="pl-s1">sheet</span>[<span class="pl-s">'A1'</span>] <span class="pl-c1">=</span> <span class="pl-s">'域名'</span>
 <span class="pl-s1">sheet</span>[<span class="pl-s">'B1'</span>] <span class="pl-c1">=</span> <span class="pl-s">'HTTPS 证书到期时间 or Error'</span>
 
 <span class="pl-k">with</span> <span class="pl-en">open</span>(<span class="pl-s">'url.txt'</span>, <span class="pl-s">'r'</span>) <span class="pl-k">as</span> <span class="pl-s1">file</span>:
-    <span class="pl-s1">domains</span> <span class="pl-c1">=</span> <span class="pl-s1">file</span>.<span class="pl-en">readlines</span>()
+    <span class="pl-s1">domains</span> <span class="pl-c1">=</span> <span class="pl-s1">file</span>.<span class="pl-c1">readlines</span>()
     <span class="pl-k">for</span> <span class="pl-s1">i</span>, <span class="pl-s1">domain</span> <span class="pl-c1">in</span> <span class="pl-en">enumerate</span>(<span class="pl-s1">domains</span>, <span class="pl-s1">start</span><span class="pl-c1">=</span><span class="pl-c1">2</span>):
-        <span class="pl-s1">domain</span> <span class="pl-c1">=</span> <span class="pl-s1">domain</span>.<span class="pl-en">strip</span>()
+        <span class="pl-s1">domain</span> <span class="pl-c1">=</span> <span class="pl-s1">domain</span>.<span class="pl-c1">strip</span>()
         <span class="pl-k">try</span>:
             <span class="pl-s1">expiry_date</span> <span class="pl-c1">=</span> <span class="pl-en">get_certificate_expiry_date</span>(<span class="pl-s1">domain</span>)
             <span class="pl-s1">sheet</span>[<span class="pl-s">f'A<span class="pl-s1"><span class="pl-kos">{</span><span class="pl-s1">i</span><span class="pl-kos">}</span></span>'</span>] <span class="pl-c1">=</span> <span class="pl-s1">domain</span>
-            <span class="pl-s1">sheet</span>[<span class="pl-s">f'B<span class="pl-s1"><span class="pl-kos">{</span><span class="pl-s1">i</span><span class="pl-kos">}</span></span>'</span>] <span class="pl-c1">=</span> <span class="pl-s1">expiry_date</span>.<span class="pl-en">strftime</span>(<span class="pl-s">'%Y-%m-%d %H:%M:%S'</span>)
+            <span class="pl-s1">sheet</span>[<span class="pl-s">f'B<span class="pl-s1"><span class="pl-kos">{</span><span class="pl-s1">i</span><span class="pl-kos">}</span></span>'</span>] <span class="pl-c1">=</span> <span class="pl-s1">expiry_date</span>.<span class="pl-c1">strftime</span>(<span class="pl-s">'%Y-%m-%d %H:%M:%S'</span>)
         <span class="pl-k">except</span> <span class="pl-v">Exception</span> <span class="pl-k">as</span> <span class="pl-s1">e</span>:
             <span class="pl-s1">sheet</span>[<span class="pl-s">f'A<span class="pl-s1"><span class="pl-kos">{</span><span class="pl-s1">i</span><span class="pl-kos">}</span></span>'</span>] <span class="pl-c1">=</span> <span class="pl-s1">domain</span>
             <span class="pl-s1">sheet</span>[<span class="pl-s">f'B<span class="pl-s1"><span class="pl-kos">{</span><span class="pl-s1">i</span><span class="pl-kos">}</span></span>'</span>] <span class="pl-c1">=</span> <span class="pl-en">str</span>(<span class="pl-s1">e</span>)
 
-<span class="pl-s1">workbook</span>.<span class="pl-en">save</span>(<span class="pl-s">'https_expiry_dates_new.xlsx'</span>)</pre></div></div>
+<span class="pl-s1">workbook</span>.<span class="pl-c1">save</span>(<span class="pl-s">'https_expiry_dates_new.xlsx'</span>)</pre></div></div>
 <div style="font-size:small;margin-top:8px;float:right;">❤️ 转载文章请注明出处，谢谢！❤️</div>
 
 <button class="btn btn-block" type="button" onclick="openComments()" id="cmButton">评论</button>

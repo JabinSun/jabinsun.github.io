@@ -174,32 +174,32 @@ body{box-sizing: border-box;min-width: 200px;max-width: 900px;margin: 20px auto;
 
 <span class="pl-k">def</span> <span class="pl-en">generate_password</span>(<span class="pl-s1">length</span><span class="pl-c1">=</span><span class="pl-c1">16</span>):
     <span class="pl-k">if</span> <span class="pl-s1">length</span> <span class="pl-c1">&lt;</span> <span class="pl-c1">8</span>:
-        <span class="pl-k">raise</span> <span class="pl-v">ValueError</span>(<span class="pl-s">"密码长度不能少于8位"</span>)
+        <span class="pl-k">raise</span> <span class="pl-en">ValueError</span>(<span class="pl-s">"密码长度不能少于8位"</span>)
 
-    <span class="pl-s1">all_chars</span> <span class="pl-c1">=</span> <span class="pl-s1">string</span>.<span class="pl-s1">ascii_letters</span> <span class="pl-c1">+</span> <span class="pl-s1">string</span>.<span class="pl-s1">digits</span> <span class="pl-c1">+</span> <span class="pl-s1">string</span>.<span class="pl-s1">punctuation</span>
+    <span class="pl-s1">all_chars</span> <span class="pl-c1">=</span> <span class="pl-s1">string</span>.<span class="pl-c1">ascii_letters</span> <span class="pl-c1">+</span> <span class="pl-s1">string</span>.<span class="pl-c1">digits</span> <span class="pl-c1">+</span> <span class="pl-s1">string</span>.<span class="pl-c1">punctuation</span>
 
     <span class="pl-s1">password</span> <span class="pl-c1">=</span> [
-        <span class="pl-s1">random</span>.<span class="pl-en">choice</span>(<span class="pl-s1">string</span>.<span class="pl-s1">ascii_lowercase</span>),
-        <span class="pl-s1">random</span>.<span class="pl-en">choice</span>(<span class="pl-s1">string</span>.<span class="pl-s1">ascii_uppercase</span>),
-        <span class="pl-s1">random</span>.<span class="pl-en">choice</span>(<span class="pl-s1">string</span>.<span class="pl-s1">digits</span>),
-        <span class="pl-s1">random</span>.<span class="pl-en">choice</span>(<span class="pl-s1">string</span>.<span class="pl-s1">punctuation</span>)
+        <span class="pl-s1">random</span>.<span class="pl-c1">choice</span>(<span class="pl-s1">string</span>.<span class="pl-c1">ascii_lowercase</span>),
+        <span class="pl-s1">random</span>.<span class="pl-c1">choice</span>(<span class="pl-s1">string</span>.<span class="pl-c1">ascii_uppercase</span>),
+        <span class="pl-s1">random</span>.<span class="pl-c1">choice</span>(<span class="pl-s1">string</span>.<span class="pl-c1">digits</span>),
+        <span class="pl-s1">random</span>.<span class="pl-c1">choice</span>(<span class="pl-s1">string</span>.<span class="pl-c1">punctuation</span>)
     ]
 
-    <span class="pl-s1">password</span> <span class="pl-c1">+=</span> <span class="pl-s1">random</span>.<span class="pl-en">choices</span>(<span class="pl-s1">all_chars</span>, <span class="pl-s1">k</span><span class="pl-c1">=</span><span class="pl-s1">length</span> <span class="pl-c1">-</span> <span class="pl-c1">4</span>)
+    <span class="pl-s1">password</span> <span class="pl-c1">+=</span> <span class="pl-s1">random</span>.<span class="pl-c1">choices</span>(<span class="pl-s1">all_chars</span>, <span class="pl-s1">k</span><span class="pl-c1">=</span><span class="pl-s1">length</span> <span class="pl-c1">-</span> <span class="pl-c1">4</span>)
 
-    <span class="pl-s1">random</span>.<span class="pl-en">shuffle</span>(<span class="pl-s1">password</span>)
+    <span class="pl-s1">random</span>.<span class="pl-c1">shuffle</span>(<span class="pl-s1">password</span>)
 
-    <span class="pl-k">return</span> <span class="pl-s">''</span>.<span class="pl-en">join</span>(<span class="pl-s1">password</span>)
+    <span class="pl-k">return</span> <span class="pl-s">''</span>.<span class="pl-c1">join</span>(<span class="pl-s1">password</span>)
 
 
 <span class="pl-k">if</span> <span class="pl-s1">__name__</span> <span class="pl-c1">==</span> <span class="pl-s">"__main__"</span>:
-    <span class="pl-en">print</span>(<span class="pl-en">len</span>(<span class="pl-s1">sys</span>.<span class="pl-s1">argv</span>))
-    <span class="pl-k">if</span> <span class="pl-en">len</span>(<span class="pl-s1">sys</span>.<span class="pl-s1">argv</span>) <span class="pl-c1">&gt;</span> <span class="pl-c1">1</span>:
+    <span class="pl-en">print</span>(<span class="pl-en">len</span>(<span class="pl-s1">sys</span>.<span class="pl-c1">argv</span>))
+    <span class="pl-k">if</span> <span class="pl-en">len</span>(<span class="pl-s1">sys</span>.<span class="pl-c1">argv</span>) <span class="pl-c1">&gt;</span> <span class="pl-c1">1</span>:
         <span class="pl-k">try</span>:
-            <span class="pl-s1">length</span> <span class="pl-c1">=</span> <span class="pl-en">int</span>(<span class="pl-s1">sys</span>.<span class="pl-s1">argv</span>[<span class="pl-c1">1</span>])
+            <span class="pl-s1">length</span> <span class="pl-c1">=</span> <span class="pl-en">int</span>(<span class="pl-s1">sys</span>.<span class="pl-c1">argv</span>[<span class="pl-c1">1</span>])
         <span class="pl-k">except</span> <span class="pl-v">ValueError</span>:
             <span class="pl-en">print</span>(<span class="pl-s">"请输入一个有效的整数作为密码长度"</span>)
-            <span class="pl-s1">sys</span>.<span class="pl-en">exit</span>(<span class="pl-c1">1</span>)
+            <span class="pl-s1">sys</span>.<span class="pl-c1">exit</span>(<span class="pl-c1">1</span>)
     <span class="pl-k">else</span>:
         <span class="pl-s1">length</span> <span class="pl-c1">=</span> <span class="pl-c1">16</span>
 
@@ -207,7 +207,7 @@ body{box-sizing: border-box;min-width: 200px;max-width: 900px;margin: 20px auto;
         <span class="pl-en">print</span>(<span class="pl-en">generate_password</span>(<span class="pl-s1">length</span>))
     <span class="pl-k">except</span> <span class="pl-v">ValueError</span> <span class="pl-k">as</span> <span class="pl-s1">e</span>:
         <span class="pl-en">print</span>(<span class="pl-s1">e</span>)
-        <span class="pl-s1">sys</span>.<span class="pl-en">exit</span>(<span class="pl-c1">1</span>)</pre></div></div>
+        <span class="pl-s1">sys</span>.<span class="pl-c1">exit</span>(<span class="pl-c1">1</span>)</pre></div></div>
 <div style="font-size:small;margin-top:8px;float:right;">❤️ 转载文章请注明出处，谢谢！❤️</div>
 
 <button class="btn btn-block" type="button" onclick="openComments()" id="cmButton">评论</button>
